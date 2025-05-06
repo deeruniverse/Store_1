@@ -28,3 +28,10 @@ button {
 button:hover {
   background: #0056b3;
 }
+a {
+  text-decoration: none;
+  color: black;
+}
+a:hover {
+  color: #007bff;
+}

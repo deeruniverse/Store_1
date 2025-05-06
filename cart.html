@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cart</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🛒 내 장바구니</h1>
+  <div id="cart-items"></div>
+  <p><strong>총 합계: $<span id="total-price">0</span></strong></p>
+  <button onclick="checkout()">주문하기</button>
+  <script>
+    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    const container = document.getElementById("cart-items");
+    const totalPrice = document.getElementById("total-price");
+    let total = 0;
+
+    if (cartItems.length === 0) {
+      container.innerHTML = "<p>장바구니가 비어 있습니다.</p>";
+    } else {
+      cartItems.forEach(item => {
+        const div = document.createElement("div");
+        div.innerText = `${item.name} - $${item.price} x ${item.qty}`;
+        container.appendChild(div);
+        total += item.price * item.qty;
+      });
+    }
+    totalPrice.innerText = total.toFixed(2);
+
+    function checkout() {
+      alert("결제가 완료되었습니다!");
+      localStorage.removeItem("cart");
+      location.reload();
+    }
+  </script>
+</body>
+</html>
